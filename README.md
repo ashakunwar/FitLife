@@ -1,6 +1,6 @@
 # FitLife - Android Fitness Planner
 
-This is my project for the CET343 Android Mobile Development module. FitLife is an app designed to help users plan and track their workout routines.
+FitLife is an app designed to help users plan and track their workout routines.
 
 ## Core Features
 
