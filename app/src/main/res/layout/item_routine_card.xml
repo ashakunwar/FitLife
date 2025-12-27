@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="8dp"
+    android:layout_marginTop="4dp"
+    android:layout_marginEnd="8dp"
+    android:layout_marginBottom="4dp"
+    app:cardCornerRadius="12dp"
+    app:cardElevation="4dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="16dp">
+
+        <ImageView
+            android:id="@+id/routine_image"
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            android:scaleType="centerCrop"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:src="@tools:sample/avatars" />
+
+        <TextView
+            android:id="@+id/routine_name"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:textAppearance="@style/TextAppearance.Material3.HeadlineSmall"
+            app:layout_constraintEnd_toStartOf="@+id/options_menu"
+            app:layout_constraintStart_toEndOf="@+id/routine_image"
+            app:layout_constraintTop_toTopOf="@+id/routine_image"
+            tools:text="Full Body Strength" />
+
+        <TextView
+            android:id="@+id/exercises_summary"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:maxLines="1"
+            android:ellipsize="end"
+            app:layout_constraintEnd_toEndOf="@+id/routine_name"
+            app:layout_constraintStart_toStartOf="@+id/routine_name"
+            app:layout_constraintTop_toBottomOf="@+id/routine_name"
+            tools:text="Push-ups: 3x10, Squats: 4x15" />
+
+        <TextView
+            android:id="@+id/equipment_summary"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:maxLines="1"
+            android:ellipsize="end"
+            android:textAppearance="@style/TextAppearance.Material3.BodySmall"
+            app:layout_constraintEnd_toEndOf="@+id/exercises_summary"
+            app:layout_constraintStart_toStartOf="@+id/exercises_summary"
+            app:layout_constraintTop_toBottomOf="@+id/exercises_summary" />
+
+        <TextView
+            android:id="@+id/location_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:drawableStart="@drawable/ic_map_pin"
+            android:drawablePadding="4dp"
+            android:gravity="center_vertical"
+            android:visibility="gone"
+            tools:visibility="visible"
+            tools:text="University Gym"
+            app:layout_constraintStart_toStartOf="@+id/equipment_summary"
+            app:layout_constraintTop_toBottomOf="@+id/equipment_summary" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/navigate_button"
+            style="@style/Widget.Material3.Button.TextButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Navigate"
+            android:visibility="gone"
+            tools:visibility="visible"
+            app:layout_constraintStart_toEndOf="@+id/location_name"
+            app:layout_constraintBaseline_toBaselineOf="@+id/location_name" />
+
+        <CheckBox
+            android:id="@+id/completed_checkbox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Completed"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/location_name"
+            app:layout_constraintTop_toBottomOf="@+id/location_name" />
+
+        <ImageButton
+            android:id="@+id/options_menu"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:src="@drawable/ic_more_vert"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</com.google.android.material.card.MaterialCardView>
