@@ -50,15 +50,14 @@ public class WeeklyPlannerActivity extends AppCompatActivity {
             for (WorkoutRoutine routine : routines) {
                 routineMap.put(routine.getId(), routine);
             }
-            updateAdapterData();
-        });
-
-        weeklyPlannerViewModel.getAllPlans().observe(this, plans -> {
-            Map<Integer, WeeklyPlan> planMap = new HashMap<>();
-            for (WeeklyPlan plan : plans) {
-                planMap.put(plan.getDayOfWeek(), plan);
-            }
-            adapter.setWeeklyData(planMap, routineMap);
+            // We need to re-trigger the plans observer to update the adapter with the new routine names
+            weeklyPlannerViewModel.getAllPlans().observe(this, plans -> {
+                Map<Integer, WeeklyPlan> planMap = new HashMap<>();
+                for (WeeklyPlan plan : plans) {
+                    planMap.put(plan.getDayOfWeek(), plan);
+                }
+                adapter.setWeeklyData(planMap, routineMap);
+            });
         });
 
         adapter.setOnDayClickListener(new WeeklyPlannerAdapter.OnDayClickListener() {
@@ -96,10 +95,23 @@ public class WeeklyPlannerActivity extends AppCompatActivity {
     }
 
     private void showAssignRoutineDialog(int dayOfWeek) {
-        // ... (as before)
-    }
+        List<String> routineNames = new ArrayList<>();
+        routineNames.add("Rest Day"); // Add Rest Day option
+        for (WorkoutRoutine routine : routineList) {
+            routineNames.add(routine.getName());
+        }
 
-    private void updateAdapterData() {
-        // ... (as before)
+        new AlertDialog.Builder(this)
+                .setTitle("Assign Routine")
+                .setItems(routineNames.toArray(new String[0]), (dialog, which) -> {
+                    if (which == 0) { // Rest Day
+                        weeklyPlannerViewModel.deleteByDay(dayOfWeek);
+                    } else {
+                        WorkoutRoutine selectedRoutine = routineList.get(which - 1); // Adjust index for Rest Day
+                        WeeklyPlan newPlan = new WeeklyPlan(dayOfWeek, selectedRoutine.getId(), false);
+                        weeklyPlannerViewModel.insertOrUpdate(newPlan);
+                    }
+                })
+                .show();
     }
 }
